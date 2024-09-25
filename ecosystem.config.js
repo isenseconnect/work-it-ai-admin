@@ -1,8 +1,12 @@
 module.exports = {
   apps: [
     {
-      name: "AI AND GO ADMIN",
-      script: "npm run start",
+      name: "did it with ai - admin",
+      script: "npx",
+      args: "next start -p 3000",
+      env: {
+        NODE_ENV: "production",
+      },
     },
   ],
 };
