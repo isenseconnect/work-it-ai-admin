@@ -1,0 +1,183 @@
+/* App.css */
+
+.app {
+  display: flex;
+  height: 100vh; /* Ensure app fills entire viewport height */
+}
+
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  position: relative;
+  /* background-color: #333; */
+  color: #fff;
+  border-right: 4px solid black ;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  height: 100vh;
+  /* background-color: #f0f0f0;  */
+}
+
+.menu-section {
+  display: block;
+  padding: 10px;
+  /* color: #fff; */
+  margin: 20px;
+  color: black;
+  text-decoration: none;
+}
+
+.menu-section:hover {
+  background-color: #555;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.pagination li {
+  margin-right: 5px;
+}
+
+.pagination li a {
+  color: #007bff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid #007bff;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.pagination li a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination .active a {
+  background-color: #007bff;
+  color: #fff;
+  border: 1px solid #007bff;
+}
+
+
+
+/* // FORM  */
+.faq-page {
+  font-family: sans-serif;
+  margin: 20px;
+}
+
+h1, h2 {
+  margin-bottom: 15px;
+}
+
+.question-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f5f5f5;
+}
+
+label {
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  resize: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+
+
+/* FOR COLLECTION */
+.collection-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.collection-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  margin: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: #ff4d4f;
+  margin-bottom: 16px;
+}
+
+.success-message {
+  color: #28a745;
+  margin-bottom: 16px;
+}
+
+.tableCell { 
+  padding: 5px;
+}
