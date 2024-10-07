@@ -16,7 +16,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await handleSignIn({ username, password });
-       window.location.reload();
+       if(response.success) window.location.reload();
     } catch (error) {
       console.error('Login Error:', error.message);
     }
