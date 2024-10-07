@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
@@ -20,19 +20,24 @@ import 'react-toastify/dist/ReactToastify.css';
 import Info from './components/Info';
 import Tool from './components/Tool';
 import Featured from './components/Featured';
+import { getCurrentUser } from 'aws-amplify/auth';
 
 const App = () => {
-  const [loggedIn, setLoggedIn] = useState(!!localStorage.getItem('token'));
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleLogin = (token) => {
-    localStorage.setItem('token', token);
-    setLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setLoggedIn(false);
-  };
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const { username } = await getCurrentUser();
+        if(username) {
+          setLoggedIn(true);
+        }
+      } catch (err) {
+        console.log('You are not authenticated', err.message);
+      }
+    };
+    fetchUser();
+  }, []);
 
   
   return (

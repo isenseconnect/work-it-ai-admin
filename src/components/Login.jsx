@@ -2,28 +2,23 @@
 
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { apiCall } from '../helper/apiHelper';
+import { handleSignIn } from '../utils/cognitoActions';
 // import { Route, Redirect } from 'react-router-dom';
 
 const Login = () => {
 
   const history = useHistory();
 
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
 
   const handleLogin = async () => {
     try {
-      const response = await apiCall('auth/login', 'POST', { email, password });
-      const { accessToken } = response.data; // Assuming your API returns a token
-
-      localStorage.setItem('token', accessToken);
-      console.log("after redirecting")
-      window.location.reload();
+      const response = await handleSignIn({ username, password });
+       window.location.reload();
     } catch (error) {
       console.error('Login Error:', error.message);
-      // alert(error.message)
     }
   };
 
@@ -48,9 +43,9 @@ const Login = () => {
       <h2>Login</h2>
       <input
         type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="password"

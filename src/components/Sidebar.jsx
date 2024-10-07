@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { handleSignOut } from '../utils/cognitoActions';
 
 const Sidebar = () => {
   return (
@@ -16,6 +17,7 @@ const Sidebar = () => {
       <Link to="/info" className="menu-section">Footer</Link>
       <Link to="/products" className="menu-section">Products</Link>
       <Link to="/settings" className="menu-section">Settings</Link>
+      <button onClick={()=> {handleSignOut()}}>Logout</button>
     </div>
   );
 };
