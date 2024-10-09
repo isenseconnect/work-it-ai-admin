@@ -7,13 +7,25 @@ const SCREENSHOT_SERVICE_URL = config.SCREENSHOT_SERVICE_URL;
 
 // Function to make API requests
 const apiCall = async (endpoint, method = "GET", payload = null, responseType = 'json') => {
-  const token = localStorage.getItem("token");
+  // Check if the cookies object is defined
+  if (document.cookie.length === 0) {
+    console.log('Cookies not set');
+  }
+
+  const clientId = process.env.REACT_APP_USER_POOL_CLIENT_ID;
+  // Access the username from the cookies
+  const usernameCookie = `CognitoIdentityServiceProvider.${clientId}.LastAuthUser`;
+  let username = getCookieByName(usernameCookie);
+
+  // Access the access token from the cookies
+  const tokenCookie = `CognitoIdentityServiceProvider.${clientId}.${username}.accessToken`;
+  const token = getCookieByName(tokenCookie);
 
   const options = {
     method,
     headers: {
       "Content-Type": payload ? "application/json" : undefined,
-      Authorization: token ? token : "",
+      Authorization: `Bearer ${token}`,
     },
   };
 
@@ -124,8 +136,11 @@ const uploadFileAPICall = async (endpoint, formData) => {
   }
 };
 // Function to handle user logout (clear token from localStorage)
-const logout = () => {
-  localStorage.removeItem("token");
-};
 
-export { apiCall, screenshotApiCall, uploadFileAPICall, logout };
+
+function getCookieByName(name) {
+  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+  return match ? match[2] : null;
+}
+
+export { apiCall, screenshotApiCall, uploadFileAPICall };

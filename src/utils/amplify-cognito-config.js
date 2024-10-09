@@ -2,8 +2,8 @@ import { Amplify } from "aws-amplify";
 
 export const authConfig = {
   Cognito: {
-    userPoolId: 'us-east-2_IyQxTzjYj',
-    userPoolClientId: '4dj0t0jqsj2j8gtdtjv6f161j9'
+    userPoolId: process.env.REACT_APP_USER_POOL_ID,
+    userPoolClientId:  process.env.REACT_APP_USER_POOL_CLIENT_ID
   },
 };
 
