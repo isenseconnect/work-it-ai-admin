@@ -7,13 +7,23 @@ const SCREENSHOT_SERVICE_URL = config.SCREENSHOT_SERVICE_URL;
 
 // Function to make API requests
 const apiCall = async (endpoint, method = "GET", payload = null, responseType = 'json') => {
-  const token = localStorage.getItem("token");
+  // Access the username from localStorage
+  const usernameKey = `CognitoIdentityServiceProvider.4dj0t0jqsj2j8gtdtjv6f161j9.LastAuthUser`;
+  const username = localStorage.getItem(usernameKey);
+
+  // Access the access token from localStorage
+  const tokenKey = `CognitoIdentityServiceProvider.4dj0t0jqsj2j8gtdtjv6f161j9.${username}.accessToken`;
+  const token = localStorage.getItem(tokenKey);
+
+  if (!token) {
+    console.log('Access token not found in localStorage');
+  }
 
   const options = {
     method,
     headers: {
       "Content-Type": payload ? "application/json" : undefined,
-      Authorization: token ? token : "",
+      Authorization: `Bearer ${token}`,
     },
   };
 

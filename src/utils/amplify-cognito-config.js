@@ -1,4 +1,6 @@
 import { Amplify } from "aws-amplify";
+import { defaultStorage } from 'aws-amplify/utils';
+import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
 
 export const authConfig = {
   Cognito: {
@@ -15,6 +17,8 @@ Amplify.configure(
     ssr: true,
   }
 );
+
+cognitoUserPoolsTokenProvider.setKeyValueStorage(defaultStorage);
 
 export default function ConfigureAmplifyClientSide() {
   return null;
