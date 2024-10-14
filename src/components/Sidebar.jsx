@@ -15,9 +15,9 @@ const Sidebar = () => {
       <Link to="/tags" className="menu-section">Tags</Link>
       <Link to="/users" className="menu-section">Users</Link>
       <Link to="/info" className="menu-section">Footer</Link>
-      <Link to="/products" className="menu-section">Products</Link>
+      {/* <Link to="/products" className="menu-section">Products</Link> */}
       <Link to="/settings" className="menu-section">Settings</Link>
-      <button onClick={()=> {handleSignOut()}}>Logout</button>
+      {/* <button onClick={()=> {handleSignOut()}}>Logout</button> */}
     </div>
   );
 };

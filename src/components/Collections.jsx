@@ -27,12 +27,12 @@ const Collections = () => {
     setError('');
 
     try {
-      const newCollection = await apiCall("collection/addCollection", "POST", {title, description});
+      const newCollection = await apiCall("collection/add", "POST", {title, description});
       setTitle('');
       setDescription('');
       // setSuccess('Collection created successfully!');
       console.log('Created collection:', newCollection);
-      fetchPublicCollections();
+      // fetchPublicCollections();
     } catch (error) {
       setError('Error creating collection.');
       console.error('Error creating collection:', error);
@@ -67,7 +67,7 @@ const Collections = () => {
     setError(null);
 
     try {
-      const response = await apiCall("collection/viewPublicCollections");
+      const response = await apiCall("collection/public");
       const { data } = response;
       setCollections(data);
     } catch (error) {

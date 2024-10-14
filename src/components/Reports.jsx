@@ -37,16 +37,18 @@ const Reports = () => {
                 <th>Reported by</th>
                 <th>Type</th>
                 <th>Toolid</th>
+                <th>Title</th>
                 <th>Reason</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               {reports.map((tool) => (
-                <tr c key={tool.id}>
-                  <td className="tableCell">{tool.username}</td>
+                <tr key={tool.id}>
+                  <td className="tableCell">{tool.username} username</td>
                   <td className="tableCell">{tool.entityType}</td>
                   <td className="tableCell">{tool.entityId}</td>
+                  <td className="tableCell">{tool.tool.title} </td>
                   <td className="tableCell">{tool.reason}</td>
                   <td className="tableCell">
                     <button

@@ -32,29 +32,30 @@ const Users = () => {
       await apiCall("faq/addFaq", "POST", { question, answer });
       setQuestion("");
       setAnswer("");
-      alert("Faq added successfully!");
+      fetchFaqs();
+      // alert("Faq added successfully!");
     } catch (error) {
       console.error("Error submitting question:", error);
       alert("Failed to submit question."); // Inform user in case of error
     }
   };
 
+  const fetchFaqs = async () => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await apiCall("faq/getFaqs");
+      const { data } = response;
+      setFaqs(data);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchFaqs = async () => {
-      setIsLoading(true);
-      setError(null);
-
-      try {
-        const response = await apiCall("faq/getFaqs");
-        const { data } = response;
-        setFaqs(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchFaqs();
   }, []);
 
@@ -67,16 +68,17 @@ const Users = () => {
       {faqs.length > 0 && (
         <ul>
           {faqs.map((faq) => (
-            <li key={faq.id}>
-              <p className="faq-question">{faq.question}</p>
-              <p className="faq-answer">{faq.answer}</p>
-            </li>
+            <div key={faq.id}>
+              <p className="faq-question">Question: {faq.question}</p>
+              <p className="faq-answer">Answer : {faq.answer}</p>
+              <hr />
+            </div>
           ))}
         </ul>
       )}
 
-      <h2>Submit Your Question</h2>
-      <form onSubmit={handleSubmit} style={{ display: "" }}>
+      <h2>Add new Question</h2>
+      <form onSubmit={handleSubmit} styldisce={{ display: "" }}>
         <label htmlFor="question">Question:</label>
         <textarea
           id="question"

@@ -3,7 +3,7 @@ module.exports = {
     {
       name: "did it with ai - admin",
       script: "npx",
-      args: "next start -p 3000",
+      args: "next start -p 5000",
       env: {
         NODE_ENV: "production",
       },

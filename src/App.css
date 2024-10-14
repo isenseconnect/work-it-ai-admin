@@ -6,24 +6,24 @@
 }
 
 .sidebar {
-  height: 100vh;
+  height: 100%;
   width: 250px;
   position: relative;
-  /* background-color: #333; */
+  background-color: #2d23237d;
   color: #fff;
-  border-right: 4px solid black ;
+  border-right: 4px solid black;
 }
 
 .main-content {
   flex: 1;
   padding: 20px;
-  height: 100vh;
-  /* background-color: #f0f0f0;  */
+  overflow-y: auto; /* Allow vertical scrolling */
+  height: 100vh; /* Ensure main-content fills the viewport height */
 }
 
 .menu-section {
   display: block;
-  padding: 10px;
+  /* padding: 10px; */
   /* color: #fff; */
   margin: 20px;
   color: black;

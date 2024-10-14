@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
-import Users from './components/Users';
-import Faq from './components/Faq';
-import Tags from './components/Tags';
-import Products from './components/Products';
-import Reports from './components/Reports';
-import Settings from './components/Settings';
-import Login from './components/Login';
-import FileUpload from './components/FileUpload';
-import DataTable from './components/DataTable';
-import ScrapImages from './components/ScrapImages';
-import Collections from './components/Collections';
-import CollectionDetails from './components/CollectionDetails';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Info from './components/Info';
-import Tool from './components/Tool';
-import Featured from './components/Featured';
-import { getCurrentUser } from 'aws-amplify/auth';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
+import Sidebar from "./components/Sidebar";
+import Dashboard from "./components/Dashboard";
+import Users from "./components/Users";
+import Faq from "./components/Faq";
+import Tags from "./components/Tags";
+import Reports from "./components/Reports";
+import Settings from "./components/Settings";
+import Login from "./components/Login";
+import FileUpload from "./components/FileUpload";
+import DataTable from "./components/DataTable";
+import ScrapImages from "./components/ScrapImages";
+import Collections from "./components/Collections";
+import CollectionDetails from "./components/CollectionDetails";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Info from "./components/Info";
+import Tool from "./components/Tool";
+import Featured from "./components/Featured";
+import { getCurrentUser } from "aws-amplify/auth";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,23 +33,21 @@ const App = () => {
     const fetchUser = async () => {
       try {
         const { username } = await getCurrentUser();
-        if(username) {
+        if (username) {
           setLoggedIn(true);
         }
       } catch (err) {
-        console.log('You are not authenticated', err.message);
+        console.log("You are not authenticated", err.message);
       }
     };
     fetchUser();
   }, []);
 
-  
   return (
     <Router>
       <ToastContainer />
       <div className="app">
-      {loggedIn && <Sidebar />}
-
+        {loggedIn && <Sidebar />}
         <div className="main-content">
           <Switch>
             {!loggedIn && <Route path="/login" component={Login} />}
@@ -58,18 +60,21 @@ const App = () => {
                 <Route path="/featured" component={Featured} />
                 <Route path="/reports" component={Reports} />
                 <Route path="/faq" component={Faq} />
-                <Route path ="/info" component={Info} />
-                <Route path="/collectionDetails/:id" component={CollectionDetails} />
+                <Route path="/info" component={Info} />
+                <Route
+                  path="/collectionDetails/:id"
+                  component={CollectionDetails}
+                />
                 <Route path="/tags" component={Tags} />
                 <Route path="/collections" component={Collections} />
                 <Route path="/settings" component={Settings} />
                 <Route path="/upload-csv" component={FileUpload} />
-                <Route path="/tool" component={Tool}/>
+                <Route path="/tool" component={Tool} />
                 <Route path="/uploaded-data" component={DataTable} />
               </>
-             ) : (
-               <Redirect to="/login"/>
-             )} 
+            ) : (
+              <Redirect to="/login" />
+            )}
           </Switch>
         </div>
       </div>
