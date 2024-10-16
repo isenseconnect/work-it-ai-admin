@@ -6,20 +6,21 @@ const BASE_URL = config.baseURL; // Replace with your API base URL
 const SCREENSHOT_SERVICE_URL = config.SCREENSHOT_SERVICE_URL;
 
 // Function to make API requests
-const apiCall = async (endpoint, method = "GET", payload = null, responseType = 'json') => {
-  // Check if the cookies object is defined
-  if (document.cookie.length === 0) {
-    console.log('Cookies not set');
+const apiCall = async (
+  endpoint,
+  method = "GET",
+  payload = null,
+  responseType = "json"
+) => {
+  // Access the username from localStorage
+  const usernameKey = `CognitoIdentityServiceProvider.4dj0t0jqsj2j8gtdtjv6f161j9.LastAuthUser`;
+  const username = localStorage.getItem(usernameKey);
+  // Access the access token from localStorage
+  const tokenKey = `CognitoIdentityServiceProvider.4dj0t0jqsj2j8gtdtjv6f161j9.${username}.accessToken`;
+  const token = localStorage.getItem(tokenKey);
+  if (!token) {
+    console.log("Access token not found in localStorage");
   }
-
-  const clientId = process.env.REACT_APP_USER_POOL_CLIENT_ID;
-  // Access the username from the cookies
-  const usernameCookie = `CognitoIdentityServiceProvider.${clientId}.LastAuthUser`;
-  let username = getCookieByName(usernameCookie);
-
-  // Access the access token from the cookies
-  const tokenCookie = `CognitoIdentityServiceProvider.${clientId}.${username}.accessToken`;
-  const token = getCookieByName(tokenCookie);
 
   const options = {
     method,
@@ -42,11 +43,11 @@ const apiCall = async (endpoint, method = "GET", payload = null, responseType = 
 
     // Handle different response types
     switch (responseType) {
-      case 'json':
+      case "json":
         return await response.json();
-      case 'text':
+      case "text":
         return await response.text();
-      case 'blob':
+      case "blob":
         return await response.blob();
       default:
         throw new Error(`Unsupported response type: ${responseType}`);
@@ -110,7 +111,6 @@ const screenshotApiCall = async (endpoint, method = "GET", payload = null) => {
 //   }
 // };
 
-
 const uploadFileAPICall = async (endpoint, formData) => {
   console.log("uploadFileAPI call formData ", formData);
   const token = localStorage.getItem("token");
@@ -135,12 +135,5 @@ const uploadFileAPICall = async (endpoint, formData) => {
     throw error;
   }
 };
-// Function to handle user logout (clear token from localStorage)
-
-
-function getCookieByName(name) {
-  const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-  return match ? match[2] : null;
-}
 
 export { apiCall, screenshotApiCall, uploadFileAPICall };
